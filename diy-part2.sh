@@ -22,7 +22,7 @@ sed -i 's/192.168.1.1/192.168.2.10/g' package/base-files/files/bin/config_genera
 
 #添加额外软件包
 #rm -rf feeds/luci/applications/luci-app-frpc
-#rm -rf feeds/luci/applications/luci-app-vssr
+rm -rf feeds/luci/applications/luci-app-vssr
 #rm -rf feeds/luci/applications/luci-app-netdata
 rm -rf feeds/luci/applications/luci-app-unblockneteasemusic
 #rm -rf feeds/luci/applications/luci-app-ssr-plus
@@ -31,7 +31,7 @@ rm -rf feeds/luci/applications/luci-app-unblockneteasemusic
 #rm -rf feeds/luci/applications/luci-app-v2ray-server
 #svn co https://github.com/coolsnowwolf/luci/trunk/applications/luci-app-v2ray-server package/luci-app-v2ray-server
 git clone https://github.com/kiddin9/openwrt-bypass.git package/bypass
-#git clone https://github.com/jerrykuku/luci-app-vssr.git package/luci-app-vssr
+git clone https://github.com/8688Add/luci-app-vssr.git package/luci-app-vssr
 git clone https://github.com/ophub/luci-app-amlogic.git package/amlogic
 git clone https://github.com/immortalwrt/luci-app-unblockneteasemusic.git package/luci-app-unblockneteasemusic
 sed -i 's/解除网易云音乐播放限制/解锁网易音乐播放限制/g' package/luci-app-unblockneteasemusic/luasrc/controller/unblockneteasemusic.lua
