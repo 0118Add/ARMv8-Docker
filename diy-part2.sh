@@ -37,8 +37,9 @@ git clone https://github.com/immortalwrt/luci-app-unblockneteasemusic.git packag
 sed -i 's/解除网易云音乐播放限制/音乐解锁/g' package/luci-app-unblockneteasemusic/luasrc/controller/unblockneteasemusic.lua
 git clone https://github.com/fw876/helloworld.git package/helloworld
 git clone https://github.com/messense/aliyundrive-webdav.git package/aliyundrive-webdav
+git clone https://github.com/liyuqing1990/luci-app-v2ray-server.git package/luci-app-v2ray-server
 sed -i 's/ShadowSocksR Plus+/SSR Plus+/g' package/helloworld/luci-app-ssr-plus/luasrc/controller/shadowsocksr.lua
-#sed -i 's/V2ray 服务器/V2ray 服务/g' package/luci-app-v2ray-server/po/zh-cn/v2ray_server.po
+sed -i 's/V2ray 服务器/V2ray 服务/g' package/luci-app-v2ray-server/po/zh-cn/v2ray_server.po
 sed -i 's/"阿里云盘 WebDAV"/"阿里云盘"/g' package/aliyundrive-webdav/openwrt/luci-app-aliyundrive-webdav/po/zh-cn/aliyundrive-webdav.po
 
 #luci-app-amlogic 晶晨宝盒
@@ -47,9 +48,9 @@ sed -i "s|opt/kernel|https://github.com/breakings/OpenWrt/opt/kernel|g" package/
 sed -i "s|ARMv8|s9xxx_lede|g" package/amlogic/luci-app-amlogic/root/etc/config/amlogic
 
 # 调整 V2ray服务 到 VPN 菜单"
-#sed -i 's/services/vpn/g' package/luci-app-v2ray-server/luasrc/controller/*.lua
-#sed -i 's/services/vpn/g' package/luci-app-v2ray-server/luasrc/model/cbi/v2ray_server/*.lua
-#sed -i 's/services/vpn/g' package/luci-app-v2ray-server/luasrc/view/v2ray_server/*.htm
+sed -i 's/services/vpn/g' package/luci-app-v2ray-server/luasrc/controller/*.lua
+sed -i 's/services/vpn/g' package/luci-app-v2ray-server/luasrc/model/cbi/v2ray_server/*.lua
+sed -i 's/services/vpn/g' package/luci-app-v2ray-server/luasrc/view/v2ray_server/*.htm
 
 #sed -i '175i\  --with-sandbox=rlimit \\' feeds/packages/net/openssh/Makefile
 
