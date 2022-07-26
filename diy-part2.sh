@@ -25,7 +25,7 @@ sed -i 's/192.168.1.1/192.168.2.10/g' package/base-files/files/bin/config_genera
 #rm -rf feeds/luci/applications/luci-app-vssr
 #rm -rf feeds/luci/applications/luci-app-netdata
 rm -rf feeds/luci/applications/luci-app-unblockneteasemusic
-rm -rf feeds/luci/applications/luci-app-ssr-plus
+#rm -rf feeds/luci/applications/luci-app-ssr-plus
 #svn co https://github.com/kiddin9/openwrt-packages/trunk/luci-app-frpc package/luci-app-frpc
 #svn co https://github.com/sirpdboy/sirpdboy-package/trunk/luci-app-netdata package/luci-app-netdata
 #rm -rf feeds/luci/applications/luci-app-v2ray-server
@@ -35,7 +35,7 @@ git clone https://github.com/kiddin9/openwrt-bypass.git package/bypass
 git clone https://github.com/ophub/luci-app-amlogic.git package/amlogic
 git clone https://github.com/immortalwrt/luci-app-unblockneteasemusic.git package/luci-app-unblockneteasemusic
 sed -i 's/解除网易云音乐播放限制/音乐解锁/g' package/luci-app-unblockneteasemusic/luasrc/controller/unblockneteasemusic.lua
-git clone https://github.com/fw876/helloworld.git package/helloworld
+#git clone https://github.com/0118Add/helloworld.git package/helloworld
 git clone https://github.com/messense/aliyundrive-webdav.git package/aliyundrive-webdav
 sed -i 's/ShadowSocksR Plus+/SSR Plus+/g' package/helloworld/luci-app-ssr-plus/luasrc/controller/shadowsocksr.lua
 #sed -i 's/V2ray 服务器/V2ray 服务/g' package/luci-app-v2ray-server/po/zh-cn/v2ray_server.po
