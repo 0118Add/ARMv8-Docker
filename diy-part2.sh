@@ -28,7 +28,7 @@ rm -rf feeds/luci/applications/luci-app-unblockneteasemusic
 rm -rf feeds/luci/applications/luci-app-ssr-plus
 #svn co https://github.com/kiddin9/openwrt-packages/trunk/luci-app-frpc package/luci-app-frpc
 #svn co https://github.com/sirpdboy/sirpdboy-package/trunk/luci-app-netdata package/luci-app-netdata
-#rm -rf feeds/luci/applications/luci-app-v2ray-server
+rm -rf feeds/luci/applications/luci-app-v2ray-server
 #svn co https://github.com/coolsnowwolf/luci/trunk/applications/luci-app-v2ray-server package/luci-app-v2ray-server
 git clone https://github.com/kiddin9/openwrt-bypass.git package/bypass
 #git clone https://github.com/8688Add/luci-app-vssr.git package/luci-app-vssr
