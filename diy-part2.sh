@@ -44,6 +44,7 @@ git clone https://github.com/messense/aliyundrive-webdav.git package/aliyundrive
 svn co https://github.com/lisaac/luci-app-dockerman/trunk/applications/luci-app-dockerman package/luci-app-dockerman
 git clone -b luci https://github.com/xiaorouji/openwrt-passwall.git package/passwall
 svn co https://github.com/kenzok8/openwrt-packages/trunk/luci-app-openclash package/luci-app-openclash
+git clone https://github.com/ophub/luci-app-amlogic.git package/amlogic
 
 #luci-app-amlogic 晶晨宝盒
 sed -i "s|https.*/s9xxx-openwrt|https://github.com/0118Add/N1dabao|g" package/amlogic/luci-app-amlogic/root/etc/config/amlogic
@@ -52,7 +53,6 @@ sed -i "s|ARMv8|s9xxx_lede|g" package/amlogic/luci-app-amlogic/root/etc/config/a
 
 # 修改插件名字
 sed -i 's/msgstr "KMS 服务器"/msgstr "KMS 激活"/g' package/openwrt_packages/luci-app-vlmcsd/po/zh-cn/vlmcsd.po
-sed -i 's/msgstr "UPnP"/msgstr "UPnP设置"/g' package/openwrt_packages/luci-app-upnp/po/zh-cn/upnp.po
 sed -i 's/Frp 内网穿透/Frp 穿透/g' package/openwrt_packages/luci-app-frpc/po/zh-cn/frp.po
 sed -i 's/SoftEther VPN 服务器/SoftEther/g' package/openwrt_packages/luci-app-softethervpn/po/zh-cn/softethervpn.po
 sed -i 's/firstchild(), "VPN"/firstchild(), "GFW"/g' package/openwrt_packages/luci-app-softethervpn/luasrc/controller/softethervpn.lua
