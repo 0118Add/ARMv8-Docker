@@ -25,7 +25,7 @@ sed -i 's/192.168.1.1/192.168.2.10/g' package/base-files/files/bin/config_genera
 #git clone https://github.com/lisaac/luci-app-dockerman.git package/luci-app-dockerman
 rm -rf feeds/luci/applications/luci-app-upnp
 rm -rf feeds/luci/applications/luci-app-vlmcsd
-#rm -rf feeds/luci/applications/luci-app-vssr
+rm -rf feeds/luci/applications/luci-app-turboacc
 rm -rf feeds/luci/applications/luci-app-openclash
 rm -rf feeds/luci/applications/luci-app-ssr-plus
 rm -rf feeds/luci/applications/luci-app-dockerman
@@ -51,15 +51,21 @@ sed -i "s|opt/kernel|https://github.com/breakings/OpenWrt/opt/kernel|g" package/
 sed -i "s|ARMv8|s9xxx_lede|g" package/amlogic/luci-app-amlogic/root/etc/config/amlogic
 
 # 修改插件名字
+sed -i 's/msgstr "KMS 服务器"/msgstr "KMS 激活"/g' package/openwrt_packages/luci-app-vlmcsd/po/zh-cn/vlmcsd.po
+sed -i 's/msgstr "UPnP"/msgstr "UPnP设置"/g' package/openwrt_packages/luci-app-upnp/po/zh-cn/upnp.po
+sed -i 's/Frp 内网穿透/Frp 穿透/g' package/openwrt_packages/luci-app-frpc/po/zh-cn/frp.po
+sed -i 's/SoftEther VPN 服务器/SoftEther/g' package/openwrt_packages/luci-app-softethervpn/po/zh-cn/softethervpn.po
+sed -i 's/firstchild(), "VPN"/firstchild(), "GFW"/g' package/openwrt_packages/luci-app-softethervpn/luasrc/controller/softethervpn.lua
+sed -i 's/Turbo ACC 网络加速/网络加速/g' package/openwrt_packages/luci-app-turboacc/po/zh-cn/turboacc.po
 sed -i 's/ShadowSocksR Plus+/SSR Plus+/g' package/helloworld/luci-app-ssr-plus/luasrc/controller/shadowsocksr.lua
 sed -i 's/"阿里云盘 WebDAV"/"阿里云盘"/g' package/aliyundrive-webdav/openwrt/luci-app-aliyundrive-webdav/po/zh-cn/aliyundrive-webdav.po
 sed -i 's/解除网易云音乐播放限制/音乐解锁/g' package/luci-app-unblockneteasemusic/luasrc/controller/unblockneteasemusic.lua
 
 
 # 调整 V2ray服务 到 VPN 菜单
-sed -i 's/services/vpn/g' package/openwrt_packages/luci-app-v2ray-server/luasrc/controller/*.lua
-sed -i 's/services/vpn/g' package/openwrt_packages/luci-app-v2ray-server/luasrc/model/cbi/v2ray_server/*.lua
-sed -i 's/services/vpn/g' package/openwrt_packages/luci-app-v2ray-server/luasrc/view/v2ray_server/*.htm
+#sed -i 's/services/vpn/g' package/openwrt_packages/luci-app-v2ray-server/luasrc/controller/*.lua
+#sed -i 's/services/vpn/g' package/openwrt_packages/luci-app-v2ray-server/luasrc/model/cbi/v2ray_server/*.lua
+#sed -i 's/services/vpn/g' package/openwrt_packages/luci-app-v2ray-server/luasrc/view/v2ray_server/*.htm
 
 # 调整 Dockerman 到 服务 菜单
 sed -i 's/"admin",/"admin","services",/g' package/openwrt_packages/luci-app-dockerman/luasrc/controller/*.lua
