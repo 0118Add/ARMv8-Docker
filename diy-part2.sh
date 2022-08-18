@@ -29,7 +29,7 @@ rm -rf feeds/luci/applications/luci-app-turboacc
 rm -rf feeds/luci/applications/luci-app-openclash
 rm -rf feeds/luci/applications/luci-app-ssr-plus
 rm -rf feeds/luci/applications/luci-app-dockerman
-rm -rf feeds/luci/applications/luci-app-v2ray-server
+rm -rf feeds/luci/applications/luci-app-softethervpn
 rm -rf feeds/luci/applications/luci-app-frpc
 rm -rf feeds/luci/applications/luci-app-zerotier
 rm -rf feeds/luci/applications/luci-app-unblockneteasemusic
