@@ -123,21 +123,18 @@ jobs:
         grep '^CONFIG_TARGET.*DEVICE.*=y' .config | sed -r 's/.*DEVICE_(.*)=y/\1/' > DEVICE_NAME
         [ -s DEVICE_NAME ] && echo "DEVICE_NAME=_$(cat DEVICE_NAME)" >> $GITHUB_ENV
         echo "FILE_DATE=_$(date +"%Y%m%d%H%M")" >> $GITHUB_ENV
+        echo "DATE_YMD=_$(date +"%Y%m%d")" >> $GITHUB_ENV
+        echo "::set-output name=status::success"
         
-    - name: Upload firmware directory
-      uses: actions/upload-artifact@main
-      if: steps.organize.outputs.status == 'success' && !cancelled()
-      with:
-        name: OpenWrt_firmware${{ env.DEVICE_NAME }}${{ env.FILE_DATE }}
-        path: ${{ env.FIRMWARE }}    
-    
     - name: Organize files
       id: organize
-      if: env.UPLOAD_FIRMWARE == 'true' && !cancelled()
+      if: steps.compile.outputs.status == 'success' && !cancelled()
       run: |
-        cd openwrt/bin/targets/*/*
-        rename 's/immortalwrt/Docker-openwrt/' openwrt*gz
-        rm -rf packages sha256sums config.buildinfo feeds.buildinfo openwrt-armvirt-64-default.manifest openwrt-armvirt-64-Image openwrt-armvirt-64-rootfs-ext4.img version.buildinfo openwrt-armvirt-64-Image-initramfs openwrt-armvirt-64-rootfs-squashfs.img immortalwrt-armvirt-64-default.manifest immortalwrt-armvirt-64-Image immortalwrt-armvirt-64-Image-initramfs immortalwrt-armvirt-64-rootfs-ext4.img.gz immortalwrt-armvirt-64-rootfs-squashfs.img.gz immortalwrt-armvirt-64-rootfs.cpio.gz
+        cd $GITHUB_WORKSPACE/openwrt/bin/packages
+        tar -zcvf AllPackages.tar.gz ./*
+        cp AllPackages.tar.gz $GITHUB_WORKSPACE/openwrt/bin/targets/*/*
+        cd $GITHUB_WORKSPACE/openwrt/bin/targets/*/*
+        rm -rf packages immortalwrt-armvirt-64-default.manifest immortalwrt-armvirt-64-Image immortalwrt-armvirt-64-Image-initramfs immortalwrt-armvirt-64-rootfs-ext4.img.gz immortalwrt-armvirt-64-rootfs-squashfs.img.gz immortalwrt-armvirt-64-rootfs.cpio.gz config.buildinfo feeds.buildinfo sha256sums version.buildinfo immortalwrt-armvirt-64-root.ext4.gz immortalwrt-armvirt-64-root.squashfs.gz
         mv immortalwrt-armvirt-64-default-rootfs.tar.gz Docker-openwrt-armvirt-64-default-rootfs.tar.gz
         echo "FIRMWARE=$PWD" >> $GITHUB_ENV
         echo "::set-output name=status::success"
