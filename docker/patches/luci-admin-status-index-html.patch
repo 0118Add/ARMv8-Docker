@@ -19,7 +19,9 @@
  		local user_info = tonumber(luci.sys.exec("cat /proc/net/arp | grep 'br-lan' | grep '0x2' | wc -l"))
  		
 @@ -65,7 +65,8 @@
- 			conncount  = conn_count,
+-			localtime  = os.date()
++			localtime  = os.date("%Y年%m月%d日") .. " " .. translate(os.date("%A")) .. " " .. os.date("%X"),
+    conncount  = conn_count,
  			leases     = stat.dhcp_leases(),
  			leases6    = stat.dhcp6_leases(),
 -			wifinets   = stat.wifi_networks()
