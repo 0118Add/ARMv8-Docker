@@ -23,8 +23,8 @@ sed -i "s|DISTRIB_DESCRIPTION='.*'|DISTRIB_DESCRIPTION='OpenWrt 18.06'|g" packag
 #sed -i "s/DISTRIB_REVISION='*.*'/DISTRIB_REVISION=''/g" package/base-files/files/etc/openwrt_release
 
 # 内核替换成 kernel 5.4.xxx
- sed -i 's/LINUX_KERNEL_HASH-5.4.203 = fc933f5b13066cfa54aacb5e86747a167bad1d8d23972e4a03ab5ee36c29798a/LINUX_KERNEL_HASH-5.4.211 = bfb43241b72cd55797af68bea1cebe630d37664c0f9a99b6e9263a63a67e2dec/g' ./include/kernel-5.4
-sed -i 's/LINUX_VERSION-5.4 = .203/LINUX_VERSION-5.4 = .211/g' ./include/kernel-5.4
+#sed -i 's/LINUX_KERNEL_HASH-5.4.203 = fc933f5b13066cfa54aacb5e86747a167bad1d8d23972e4a03ab5ee36c29798a/LINUX_KERNEL_HASH-5.4.211 = bfb43241b72cd55797af68bea1cebe630d37664c0f9a99b6e9263a63a67e2dec/g' ./include/kernel-5.4
+#sed -i 's/LINUX_VERSION-5.4 = .203/LINUX_VERSION-5.4 = .211/g' ./include/kernel-5.4
 
 # 修改系统文件
 #curl -fsSL https://raw.githubusercontent.com/0118Add/OpenWrt-CI/main/x86/diy/x86_lede/immortalwrt.index.htm > ./package/emortal/autocore/files/generic/index.htm
@@ -51,6 +51,7 @@ git clone https://github.com/0118Add/helloworld.git package/helloworld
 git clone https://github.com/messense/aliyundrive-webdav.git package/aliyundrive-webdav
 git clone -b luci https://github.com/xiaorouji/openwrt-passwall.git package/passwall
 svn co https://github.com/kenzok8/openwrt-packages/trunk/luci-app-openclash package/luci-app-openclash
+git clone https://github.com/sbwml/luci-app-alist.git package/alist
 git clone https://github.com/ophub/luci-app-amlogic.git package/amlogic
 
 #luci-app-amlogic 晶晨宝盒
@@ -59,6 +60,7 @@ sed -i "s|opt/kernel|https://github.com/breakings/OpenWrt/opt/kernel|g" package/
 sed -i "s|ARMv8|s9xxx_lede|g" package/amlogic/luci-app-amlogic/root/etc/config/amlogic
 
 # 修改插件名字
+sed -i 's/Alist 文件列表/文件列表/g' package/alist/luci-app-alist/po/zh-cn/alist.po
 sed -i 's/ShadowSocksR Plus+/SSR Plus+/g' package/helloworld/luci-app-ssr-plus/luasrc/controller/shadowsocksr.lua
 sed -i 's/"阿里云盘 WebDAV"/"阿里云盘"/g' package/aliyundrive-webdav/openwrt/luci-app-aliyundrive-webdav/po/zh-cn/aliyundrive-webdav.po
 sed -i 's/解除网易云音乐播放限制/音乐解锁/g' package/luci-app-unblockneteasemusic/luasrc/controller/unblockneteasemusic.lua
@@ -68,6 +70,11 @@ sed -i 's/解除网易云音乐播放限制/音乐解锁/g' package/luci-app-unb
 #sed -i 's/services/vpn/g' package/openwrt_packages/luci-app-v2ray-server/luasrc/controller/*.lua
 #sed -i 's/services/vpn/g' package/openwrt_packages/luci-app-v2ray-server/luasrc/model/cbi/v2ray_server/*.lua
 #sed -i 's/services/vpn/g' package/openwrt_packages/luci-app-v2ray-server/luasrc/view/v2ray_server/*.htm
+
+# 调整 Alist 文件列表 到 系统 菜单
+sed -i 's/nas/system/g' package/alist/luci-app-alist/luasrc/controller/*.lua
+sed -i 's/nas/system/g' package/alist/luci-app-alist/luasrc/model/cbi/alist/*.lua
+sed -i 's/nas/system/g' package/alist/luci-app-alist/luasrc/view/alist/*.htm
 
 # 调整 bypass 到 GFW 菜单
 sed -i 's/services/vpn/g' package/bypass/luci-app-bypass/luasrc/controller/*.lua
