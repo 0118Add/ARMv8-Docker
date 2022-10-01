@@ -77,9 +77,9 @@ sed -i 's/nas/system/g' package/alist/luci-app-alist/luasrc/model/cbi/alist/*.lu
 sed -i 's/nas/system/g' package/alist/luci-app-alist/luasrc/view/alist/*.htm
 
 # 调整 bypass 到 GFW 菜单
-sed -i 's/services/vpn/g' package/bypass/luci-app-bypass/luasrc/controller/*.lua
-sed -i 's/services/vpn/g' package/bypass/luci-app-bypass/luasrc/model/cbi/bypass/*.lua
-sed -i 's/services/vpn/g' package/bypass/luci-app-bypass/luasrc/view/bypass/*.htm
+sed -i 's/services/vpn/g' package/luci-app-bypass/luasrc/controller/*.lua
+sed -i 's/services/vpn/g' package/luci-app-bypass/luasrc/model/cbi/bypass/*.lua
+sed -i 's/services/vpn/g' package/luci-app-bypass/luasrc/view/bypass/*.htm
 
 # 调整 SSRP 到 GFW 菜单
 sed -i 's/services/vpn/g' package/helloworld/luci-app-ssr-plus/luasrc/controller/*.lua
