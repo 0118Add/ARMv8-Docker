@@ -1,4 +1,4 @@
-name: ARMv8_Docker
+name: ARMv8_Docker-18.06
 
 on:
   repository_dispatch:
