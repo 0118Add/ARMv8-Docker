@@ -69,9 +69,9 @@ sed -i 's/解除网易云音乐播放限制/音乐解锁/g' package/luci-app-unb
 #sed -i 's/services/vpn/g' package/openwrt_packages/luci-app-v2ray-server/luasrc/view/v2ray_server/*.htm
 
 # 调整 Alist 文件列表 到 系统 菜单
-sed -i 's/nas/system/g' package/alist/luci-app-alist/luasrc/controller/*.lua
-sed -i 's/nas/system/g' package/alist/luci-app-alist/luasrc/model/cbi/alist/*.lua
-sed -i 's/nas/system/g' package/alist/luci-app-alist/luasrc/view/alist/*.htm
+#sed -i 's/nas/system/g' package/alist/luci-app-alist/luasrc/controller/*.lua
+#sed -i 's/nas/system/g' package/alist/luci-app-alist/luasrc/model/cbi/alist/*.lua
+#sed -i 's/nas/system/g' package/alist/luci-app-alist/luasrc/view/alist/*.htm
 
 # 调整 bypass 到 GFW 菜单
 sed -i 's/services/vpn/g' package/luci-app-bypass/luasrc/controller/*.lua
