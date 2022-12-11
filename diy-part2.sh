@@ -21,8 +21,8 @@ sed -i "s|DISTRIB_REVISION='.*'|DISTRIB_REVISION=''|g" package/base-files/files/
 sed -i "s|DISTRIB_DESCRIPTION='.*'|DISTRIB_DESCRIPTION='OpenWrt 18.06'|g" package/base-files/files/etc/openwrt_release
 
 # 内核替换成 kernel 5.4.xxx
-sed -i 's/LINUX_KERNEL_HASH-5.4.203 = fc933f5b13066cfa54aacb5e86747a167bad1d8d23972e4a03ab5ee36c29798a/LINUX_KERNEL_HASH-5.4.226 = 0c1f552a1d2f63b3ecd4d33189f0003bc91fb8ff79967a7e295d015c280c9a44/g' ./include/kernel-5.4
-sed -i 's/LINUX_VERSION-5.4 = .203/LINUX_VERSION-5.4 = .226/g' ./include/kernel-5.4
+#sed -i 's/LINUX_KERNEL_HASH-5.4.203 = fc933f5b13066cfa54aacb5e86747a167bad1d8d23972e4a03ab5ee36c29798a/LINUX_KERNEL_HASH-5.4.226 = 0c1f552a1d2f63b3ecd4d33189f0003bc91fb8ff79967a7e295d015c280c9a44/g' ./include/kernel-5.4
+#sed -i 's/LINUX_VERSION-5.4 = .203/LINUX_VERSION-5.4 = .226/g' ./include/kernel-5.4
 
 # 修改系统文件
 #curl -fsSL https://raw.githubusercontent.com/0118Add/OpenWrt-CI/main/x86/diy/x86_lede/immortalwrt.index.htm > ./package/emortal/autocore/files/generic/index.htm
