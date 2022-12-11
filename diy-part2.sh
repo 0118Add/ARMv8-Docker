@@ -11,7 +11,7 @@
 #
 
 # 更改主机名
-#sed -i "s/hostname='.*'/hostname='N1'/g" package/base-files/files/bin/config_generate
+sed -i "s/hostname='.*'/hostname='OpenWrt'/g" package/base-files/files/bin/config_generate
 
 # Modify default IP
 sed -i 's/192.168.1.1/192.168.2.10/g' package/base-files/files/bin/config_generate
@@ -42,7 +42,7 @@ rm -rf feeds/luci/applications/luci-app-unblockneteasemusic
 git clone https://github.com/0118Add/openwrt_packages package/openwrt_packages
 git clone https://github.com/0118Add/luci-app-unblockneteasemusic.git package/luci-app-unblockneteasemusic
 #svn co https://github.com/kiddin9/openwrt-packages/trunk/luci-app-netdata package/luci-app-netdata
-svn co https://github.com/kiddin9/openwrt-packages/trunk/luci-app-bypass package/luci-app-bypass
+svn co https://github.com/0118Add/openwrt-packages/trunk/luci-app-bypass package/luci-app-bypass
 git clone https://github.com/fw876/helloworld.git package/helloworld
 #git clone https://github.com/messense/aliyundrive-webdav.git package/aliyundrive-webdav
 #git clone -b luci https://github.com/xiaorouji/openwrt-passwall.git package/passwall
