@@ -1,66 +1,78 @@
 #!/bin/bash
-#
-# Copyright (c) 2019-2020 P3TERX <https://p3terx.com>
-#
-# This is free software, licensed under the MIT License.
-# See /LICENSE for more information.
-#
-# https://github.com/P3TERX/Actions-OpenWrt
+#===============================================
+# Description: DIY script part 2
 # File name: diy-part2.sh
-# Description: OpenWrt DIY script part 2 (After Update feeds)
-#
+# Lisence: MIT
+# By: BGG
+#===============================================
+
 
 # 更改主机名
 sed -i "s/hostname='.*'/hostname='OpenWrt'/g" package/base-files/files/bin/config_generate
 
+# 更改固件版本信息
+sed -i "s|DISTRIB_REVISION='.*'|DISTRIB_REVISION=''|g" package/base-files/files/etc/openwrt_release
+sed -i "s/DISTRIB_DESCRIPTION='*.*'/DISTRIB_DESCRIPTION='OpenWrt 18.06'/g" package/base-files/files/etc/openwrt_release
+#sed -i "s|DISTRIB_DESCRIPTION='.*'|DISTRIB_DESCRIPTION='OpenWrt 21.02'|g" package/base-files/files/etc/openwrt_release
+
 # Modify default IP
 sed -i 's/192.168.1.1/192.168.2.10/g' package/base-files/files/bin/config_generate
 
-# 更改固件版本信息
-sed -i "s|DISTRIB_REVISION='.*'|DISTRIB_REVISION=''|g" package/base-files/files/etc/openwrt_release
-sed -i "s|DISTRIB_DESCRIPTION='.*'|DISTRIB_DESCRIPTION='OpenWrt 18.06'|g" package/base-files/files/etc/openwrt_release
+# 修改连接数
+#sed -i 's/net.netfilter.nf_conntrack_max=.*/net.netfilter.nf_conntrack_max=65535/g' package/kernel/linux/files/sysctl-nf-conntrack.conf
 
-# 内核替换成 kernel 5.4.xxx
-#sed -i 's/LINUX_KERNEL_HASH-5.4.203 = fc933f5b13066cfa54aacb5e86747a167bad1d8d23972e4a03ab5ee36c29798a/LINUX_KERNEL_HASH-5.4.226 = 0c1f552a1d2f63b3ecd4d33189f0003bc91fb8ff79967a7e295d015c280c9a44/g' ./include/kernel-5.4
-#sed -i 's/LINUX_VERSION-5.4 = .203/LINUX_VERSION-5.4 = .226/g' ./include/kernel-5.4
+#修正连接数
+#sed -i '/customized in this file/a net.netfilter.nf_conntrack_max=165535' package/base-files/files/etc/sysctl.conf
 
-# 修改系统文件
-#curl -fsSL https://raw.githubusercontent.com/0118Add/OpenWrt-CI/main/x86/diy/x86_lede/immortalwrt.index.htm > ./package/emortal/autocore/files/generic/index.htm
-curl -fsSL https://raw.githubusercontent.com/0118Add/OpenWrt-CI/main/x86/diy/x86_lede/cpuinfo > ./package/emortal/autocore/files/generic/cpuinfo
+# 替换banner
+wget -O ./package/base-files/files/etc/banner https://raw.githubusercontent.com/0118Add/OpenWrt-CI/main/x86/diy/x86_lede/banner
 
-# 添加额外软件包
+# 内核替换成 kernel 5.xxx
+#sed -i 's/LINUX_KERNEL_HASH-5.4.203 = fc933f5b13066cfa54aacb5e86747a167bad1d8d23972e4a03ab5ee36c29798a/LINUX_KERNEL_HASH-5.4.210 = 940396878c2c183531669d87831eda60a86fbf4662904922c49151b50afc888e/g' ./include/kernel-version.mk
+#sed -i 's/LINUX_VERSION-5.4 = .203/LINUX_VERSION-5.4 = .210/g' ./include/kernel-version.mk
+
+# 设置密码为空（安装固件时无需密码登陆，然后自己修改想要的密码）
+#sed -i 's@.*CYXluq4wUazHjmCDBCqXF*@#&@g' package/lean/default-settings/files/zzz-default-settings
+
+#添加额外软件包
 #rm -rf package/lean/luci-lib-docker
-#git clone https://github.com/lisaac/luci-lib-docker.git package/luci-lib-docker
-#git clone https://github.com/lisaac/luci-app-dockerman.git package/luci-app-dockerman
+#rm -rf feeds/luci/applications/luci-app-dockerman
+#rm -rf feeds/luci/applications/luci-app-frpc
 #rm -rf feeds/luci/applications/luci-app-vssr
-#rm -rf feeds/luci/applications/luci-app-passwall
+rm -rf feeds/luci/applications/luci-app-passwall
 #rm -rf feeds/luci/applications/luci-app-openclash
 rm -rf feeds/luci/applications/luci-app-ssr-plus
 rm -rf feeds/luci/applications/luci-app-unblockneteasemusic
 #git clone https://github.com/jerrykuku/luci-app-vssr.git package/luci-app-vssr
 #git clone https://github.com/jerrykuku/lua-maxminddb.git package/lua-maxminddb
-git clone https://github.com/0118Add/openwrt_packages package/openwrt_packages
+svn co https://github.com/kenzok8/openwrt-packages/trunk/luci-theme-atmaterial_new package/luci-theme-atmaterial_new
+#svn co https://github.com/kiddin9/openwrt-packages/trunk/luci-app-frpc package/luci-app-frpc
+#svn co https://github.com/lisaac/luci-app-dockerman/trunk/applications/luci-app-dockerman package/luci-app-dockerman
 git clone https://github.com/0118Add/luci-app-unblockneteasemusic.git package/luci-app-unblockneteasemusic
 #svn co https://github.com/kiddin9/openwrt-packages/trunk/luci-app-netdata package/luci-app-netdata
-svn co https://github.com/0118Add/openwrt-packages/trunk/luci-app-bypass package/luci-app-bypass
-git clone https://github.com/fw876/helloworld.git package/helloworld
-#git clone https://github.com/messense/aliyundrive-webdav.git package/aliyundrive-webdav
+#svn co https://github.com/kiddin9/openwrt-packages/trunk/luci-app-bypass package/luci-app-bypass
+svn co https://github.com/kiddin9/openwrt-packages/trunk/ddnsto package/ddnsto
+svn co https://github.com/kiddin9/openwrt-packages/trunk/luci-app-ddnsto package/luci-app-ddnsto
 git clone -b luci https://github.com/xiaorouji/openwrt-passwall.git package/passwall
-#svn co https://github.com/kenzok8/openwrt-packages/trunk/luci-app-openclash package/luci-app-openclash
+#svn co https://github.com/kiddin9/openwrt-packages/trunk/luci-app-ssr-plus package/luci-app-ssr-plus
+svn co https://github.com/fw876/helloworld/trunk/luci-app-ssr-plus package/luci-app-ssr-plus
 git clone https://github.com/sbwml/luci-app-alist.git package/alist
 git clone https://github.com/ophub/luci-app-amlogic.git package/amlogic
+#git clone https://github.com/messense/aliyundrive-webdav.git package/aliyundrive-webdav
+#svn co https://github.com/vernesong/OpenClash/branches/dev/luci-app-openclash package/luci-app-openclash
 
-# luci-app-amlogic 晶晨宝盒
-sed -i "s|https.*/s9xxx-openwrt|https://github.com/0118Add/N1dabao|g" package/amlogic/luci-app-amlogic/root/etc/config/amlogic
-sed -i "s|opt/kernel|https://github.com/breakings/OpenWrt/opt/kernel|g" package/amlogic/luci-app-amlogic/root/etc/config/amlogic
-sed -i "s|ARMv8|s9xxx_lede|g" package/amlogic/luci-app-amlogic/root/etc/config/amlogic
 
 # 修改插件名字
-#sed -i 's/Alist 文件列表/文件列表/g' package/alist/luci-app-alist/po/zh-cn/alist.po
-sed -i 's/ShadowSocksR Plus+/SSR Plus+/g' package/helloworld/luci-app-ssr-plus/luasrc/controller/shadowsocksr.lua
+#sed -i 's/Frp 内网穿透/内网穿透/g' package/luci-app-frpc/po/zh-cn/frp.po
+#sed -i 's/ShadowSocksR Plus+/SSR Plus+/g' package/luci-app-ssr-plus/luasrc/controller/shadowsocksr.lua
+#sed -i 's/Alist 文件列表/网络云盘/g' package/alist/luci-app-alist/po/zh-cn/alist.po
 #sed -i 's/"阿里云盘 WebDAV"/"阿里云盘"/g' package/aliyundrive-webdav/openwrt/luci-app-aliyundrive-webdav/po/zh-cn/aliyundrive-webdav.po
-sed -i 's/解除网易云音乐播放限制/音乐解锁/g' package/luci-app-unblockneteasemusic/luasrc/controller/unblockneteasemusic.lua
+sed -i 's/解除网易云音乐播放限制/解锁网易音乐播放限制/g' package/luci-app-unblockneteasemusic/luasrc/controller/unblockneteasemusic.lua
 
+# luci-app-amlogic 晶晨宝盒
+sed -i "s|https.*/s9xxx-openwrt|https://github.com/0118Add/flippy-dabao|g" package/amlogic/luci-app-amlogic/root/etc/config/amlogic
+sed -i "s|opt/kernel|https://github.com/breakings/OpenWrt/opt/kernel|g" package/amlogic/luci-app-amlogic/root/etc/config/amlogic
+sed -i "s|ARMv8|s9xxx_lede|g" package/amlogic/luci-app-amlogic/root/etc/config/amlogic
 
 # 调整 V2ray服务 到 VPN 菜单
 #sed -i 's/services/vpn/g' package/openwrt_packages/luci-app-v2ray-server/luasrc/controller/*.lua
@@ -72,15 +84,22 @@ sed -i 's/解除网易云音乐播放限制/音乐解锁/g' package/luci-app-unb
 #sed -i 's/nas/system/g' package/alist/luci-app-alist/luasrc/model/cbi/alist/*.lua
 #sed -i 's/nas/system/g' package/alist/luci-app-alist/luasrc/view/alist/*.htm
 
+# 调整 Dockerman 到 服务 菜单
+#sed -i 's/"admin",/"admin","services",/g' package/luci-app-dockerman/luasrc/controller/*.lua
+#sed -i 's/"admin/"admin\/services/g' package/luci-app-dockerman/luasrc/model/*.lua
+#sed -i 's/"admin/"admin\/services/g' package/luci-app-dockerman/luasrc/model/cbi/dockerman/*.lua
+#sed -i 's/"admin/"admin\/services/g' package/luci-app-dockerman/luasrc/view/dockerman/*.htm
+#sed -i 's/"admin/"admin\/services/g' package/luci-app-dockerman/luasrc/view/dockerman/cbi/*.htm
+
 # 调整 bypass 到 GFW 菜单
 #sed -i 's/services/vpn/g' package/luci-app-bypass/luasrc/controller/*.lua
 #sed -i 's/services/vpn/g' package/luci-app-bypass/luasrc/model/cbi/bypass/*.lua
 #sed -i 's/services/vpn/g' package/luci-app-bypass/luasrc/view/bypass/*.htm
 
 # 调整 SSRP 到 GFW 菜单
-#sed -i 's/services/vpn/g' package/helloworld/luci-app-ssr-plus/luasrc/controller/*.lua
-#sed -i 's/services/vpn/g' package/helloworld/luci-app-ssr-plus/luasrc/model/cbi/shadowsocksr/*.lua
-#sed -i 's/services/vpn/g' package/helloworld/luci-app-ssr-plus/luasrc/view/shadowsocksr/*.htm
+#sed -i 's/services/vpn/g' package/luci-app-ssr-plus/luasrc/controller/*.lua
+#sed -i 's/services/vpn/g' package/luci-app-ssr-plus/luasrc/model/cbi/shadowsocksr/*.lua
+#sed -i 's/services/vpn/g' package/luci-app-ssr-plus/luasrc/view/shadowsocksr/*.htm
 
 # 调整 Pass Wall 到 GFW 菜单
 #sed -i 's/services/vpn/g' package/passwall/luci-app-passwall/luasrc/controller/*.lua
