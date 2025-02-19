@@ -125,10 +125,3 @@ jobs:
           delete_workflows: true
           workflows_keep_day: 3
           gh_token: ${{ secrets.GH_TOKEN }}
-
-      - name: Telegram notification
-        run: |
-          MSG="
-          ${{ env.KERNEL_VERSION }}-${{ env.BOARDFAMILY }} 编译完成！
-          "
-          curl "https://api.telegram.org/bot${{ secrets.TELEGRAM_TOKEN }}/sendMessage" -d "chat_id=${{ secrets.TELEGRAM_TO }}&text=${MSG}"
