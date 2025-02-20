@@ -18,6 +18,7 @@ on:
         options:
           - 'current'
           - 'edge'
+          - 'dev'
       RELEASE:
         description: 'Release name'
         default: 'bookworm'
@@ -61,6 +62,10 @@ on:
           - 'ubuntu:jammy'
           - 'ubuntu:noble'
           - 'debian:bookworm'
+      PR:
+        description: 'Enter the PR number to build'
+        required: true
+        type: number
 
 env:
   TZ: Asia/Shanghai
@@ -92,8 +97,13 @@ jobs:
         working-directory: /mnt/workdir
         run: |
           df -hT ${PWD}
-          git clone -q --single-branch --depth=1 --branch=warpme-6.12 https://github.com/NickAlilovic/build.git build
+          git clone -q --branch=main https://github.com/armbian/build build
           ln -sf /mnt/workdir/build $GITHUB_WORKSPACE/build
+          cd $GITHUB_WORKSPACE/build
+          git config --global user.name "GitHub Actions"
+          git config --global user.email "actions@github.com"
+          git fetch origin pull/${{ inputs.PR }}/head:pr-branch
+          git merge pr-branch --no-ff -m "Merge PR #${{ inputs.PR }} into main"
 
       - name: Compile Armbian [ ${{ inputs.BOARD }} ${{ inputs.BRANCH }} ${{ inputs.RELEASE }} ]
         run: |
